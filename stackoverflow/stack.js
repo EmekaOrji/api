@@ -5,22 +5,7 @@ fetch(apiUrl)
 	.then((answer) => generateHTML(answer));
 
 
-var userID = 1;
 function generateHTML(data) {
-
-  // for (const item in data.items) {
-  //   if (Object.hasOwnProperty.call(data.items, item)) {
-  //     const e = data.items.indexOf(data.items[item]);
-  //     // console.log(e);
-  //     console.log(item);
-  //   }
-  // }
-  
-  // for (const item of data.items) {
-  //   const e = data.items.indexOf(data.items[item]);
-  //   // console.log(e);
-  //   console.log(item);
-  // }
 
   const tableHead = () => {
     return `
@@ -36,28 +21,28 @@ function generateHTML(data) {
   }
 	const content = (ID) => {
     return `
-      <tr>
-        <td>${ID + 1}</td>
-        <td>${data.items[ID].display_name}</td>
-        <td><img src="${data.items[ID].profile_image}"></td>
-        <td>${data.items[ID].reputation}</td>
-        <td>${data.items[ID].user_type}</td>
-        <td><a href="${data.items[ID].link}" id='profile'>Profile</a></td>
-      </tr>
+      <td>${ID + 1}</td>
+      <td>${data.items[ID].display_name}</td>
+      <td><img src="${data.items[ID].profile_image}"></td>
+      <td>${data.items[ID].reputation}</td>
+      <td>${data.items[ID].user_type}</td>
+      <td><a href="${data.items[ID].link}" id='profile'>Profile</a></td>
     `;
   }
 
+  const html = `
+    <table id='stackUsers'>
+      ${tableHead()}
+    </table>
+  `;
+  var head = document.getElementById("app");
+  head.innerHTML = html;
+
   data.items.forEach((e, i) => {
     var userID = i;
-    const html = `
-      <table id='stackUsers'>
-        ${tableHead()}
-        ${content(userID)}
-      </table>
-    `;
-    var htmlObject = document.createElement('div');
-    htmlObject.innerHTML = html;
-    document.getElementById("app").append(htmlObject);
+    var row = document.createElement('tr');
+    row.innerHTML = content(userID);
+    document.getElementById("stackUsers").append(row);
   });
 
 }
