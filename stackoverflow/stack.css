@@ -53,8 +53,10 @@ table #profile {
   border-radius: .4em;
   text-decoration: none;
   -webkit-tap-highlight-color: none;
+  transition: 200ms all ease;
 }
 table #profile:hover {
   padding-left: .8em;
+  padding-right: .8em;
   box-shadow: 1px 1px 5px #0002;
 }
